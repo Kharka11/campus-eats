@@ -1,0 +1,52 @@
+<%- include('partials/header') %>
+
+<section class="hero">
+  <span class="eyebrow">Multi-restaurant ordering</span>
+  <h1>Welcome to Campus Eats</h1>
+  <p>Order from multiple restaurants, all in one place.</p>
+</section>
+
+<section class="stats-bar">
+  <p><strong><%= stats.total_orders %></strong> orders placed · Nu. <strong><%= stats.total_revenue %></strong> in sales</p>
+</section>
+
+<% if (popularItems.length > 0) { %>
+  <section class="popular">
+    <h2>Popular Right Now</h2>
+    <div class="popular-grid">
+      <% popularItems.forEach(item => { %>
+        <div class="popular-item">
+          <h3><%= item.name %></h3>
+          <span class="rating-pill"><%= item.times_ordered %> ordered</span>
+        </div>
+      <% }); %>
+    </div>
+  </section>
+<% } %>
+
+<section class="restaurants">
+  <h2>Popular Restaurants</h2>
+  <div class="restaurant-grid">
+    <% restaurants.forEach(r => { %>
+      <div class="restaurant-card">
+        <div class="avatar"><%= r.name.charAt(0) %></div>
+        <h3><%= r.name %></h3>
+        <p><%= r.cuisine %></p>
+        <span class="rating-pill">★ <%= r.rating %></span>
+        <a href="/restaurants/<%= r.id %>/menu" class="btn">View Menu</a>
+      </div>
+    <% }); %>
+  </div>
+</section>
+
+<section class="order-lookup">
+  <h2>Check an Order</h2>
+  <div class="lookup-box">
+    <input type="number" id="orderIdInput" placeholder="Order ID" min="1">
+    <button id="lookupBtn" class="btn">Look Up</button>
+  </div>
+  <p id="lookupResult"></p>
+</section>
+<script src="/js/orderLookup.js"></script>
+
+<%- include('partials/footer') %>
